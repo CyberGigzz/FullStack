@@ -4,6 +4,7 @@ import PersonForm from './components/PersonForm';
 import Persons from './components/Persons';
 // import axios from 'axios';
 import personService from './services/persons';
+import Notification from './components/Notification';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -13,6 +14,7 @@ const App = () => {
     name: '',
     number: '',
   });
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     personService.getAll().then((initialNotes) => {
@@ -50,6 +52,18 @@ const App = () => {
               name: '',
               number: '',
             });
+            setMessage(`Updated ${returnedPerson.name}`);
+            setTimeout(() => {
+              setMessage(null);
+            }, 5000);
+          })
+          .catch((error) => {
+            setMessage(
+              `Information of ${newPerson.name} has already been removed from server`
+            );
+            setTimeout(() => {
+              setMessage(null);
+            }, 5000);
           });
       }
     } else {
@@ -59,6 +73,10 @@ const App = () => {
           name: '',
           number: '',
         });
+        setMessage(`Added ${returnedPerson.name}`);
+        setTimeout(() => {
+          setMessage(null);
+        }, 5000);
       });
     }
   };
@@ -92,6 +110,7 @@ const App = () => {
   return (
     <div>
       <Filter searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
+      <Notification message={message} />
       <PersonForm
         newPerson={newPerson}
         handleInputChange={handleInputChange}
