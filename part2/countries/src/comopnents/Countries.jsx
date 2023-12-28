@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import Weather from './Weather';
+import { useState } from "react";
+import Weather from "./Weather";
 
 const Countries = ({ countries }) => {
   const [shownCountry, setShownCountry] = useState(null);
+  console.log(countries);
 
   if (countries.length > 10) {
     return <div>Too many matches, specify another filter</div>;
@@ -19,7 +20,7 @@ const Countries = ({ countries }) => {
                   : setShownCountry(country)
               }
             >
-              {shownCountry === country ? 'hide' : 'show'}
+              {shownCountry === country ? "hide" : "show"}
             </button>
             {shownCountry === country && (
               <div>

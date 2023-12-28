@@ -1,18 +1,18 @@
-import { useState, useEffect } from 'react';
-import Filter from './components/Filter';
-import PersonForm from './components/PersonForm';
-import Persons from './components/Persons';
+import { useState, useEffect } from "react";
+import Filter from "./components/Filter";
+import PersonForm from "./components/PersonForm";
+import Persons from "./components/Persons";
 // import axios from 'axios';
-import personService from './services/persons';
-import Notification from './components/Notification';
+import personService from "./services/persons";
+import Notification from "./components/Notification";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
 
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [newPerson, setNewPerson] = useState({
-    name: '',
-    number: '',
+    name: "",
+    number: "",
   });
   const [message, setMessage] = useState(null);
 
@@ -49,15 +49,15 @@ const App = () => {
               )
             );
             setNewPerson({
-              name: '',
-              number: '',
+              name: "",
+              number: "",
             });
             setMessage(`Updated ${returnedPerson.name}`);
             setTimeout(() => {
               setMessage(null);
             }, 5000);
           })
-          .catch((error) => {
+          .catch(() => {
             setMessage(
               `Information of ${newPerson.name} has already been removed from server`
             );
@@ -70,8 +70,8 @@ const App = () => {
       personService.create(nameObject).then((returnedPerson) => {
         setPersons(persons.concat(returnedPerson));
         setNewPerson({
-          name: '',
-          number: '',
+          name: "",
+          number: "",
         });
         setMessage(`Added ${returnedPerson.name}`);
         setTimeout(() => {
@@ -90,7 +90,7 @@ const App = () => {
   };
 
   const handleDelete = (id) => {
-    if (window.confirm('Do you really want to delete this person?')) {
+    if (window.confirm("Do you really want to delete this person?")) {
       personService.remove(id).then(() => {
         const updatedPersons = persons.filter((person) => person.id !== id);
         setPersons(updatedPersons);

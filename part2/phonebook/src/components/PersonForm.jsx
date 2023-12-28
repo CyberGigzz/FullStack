@@ -5,7 +5,7 @@ const PersonForm = ({ newPerson, handleInputChange, addName }) => {
 
       <form onSubmit={addName}>
         <div>
-          name:{' '}
+          name:{" "}
           <input
             type="text"
             name="name"
@@ -15,7 +15,7 @@ const PersonForm = ({ newPerson, handleInputChange, addName }) => {
         </div>
 
         <div>
-          number:{' '}
+          number:{" "}
           <input
             type="number"
             name="number"
