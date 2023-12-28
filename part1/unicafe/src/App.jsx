@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const Button = ({ handleClick, text }) => (
   <button onClick={handleClick}>{text}</button>
@@ -6,8 +6,8 @@ const Button = ({ handleClick, text }) => (
 
 const Statistics = ({ good, neutral, bad }) => {
   const all = good + neutral + bad;
-  const average = all > 0 ? ((good - bad) / all).toFixed(2) : '0.00';
-  const positive = all > 0 ? ((good / all) * 100).toFixed(2) : '0.00';
+  const average = all > 0 ? ((good - bad) / all).toFixed(2) : "0.00";
+  const positive = all > 0 ? ((good / all) * 100).toFixed(2) : "0.00";
 
   if (all === 0) {
     return <div>No feedback given</div>;
@@ -21,7 +21,7 @@ const Statistics = ({ good, neutral, bad }) => {
         <StatisticLine text="Bad" value={bad} />
         <StatisticLine text="All" value={all} />
         <StatisticLine text="Average" value={average} />
-        <StatisticLine text="Positive" value={positive + '%'} />
+        <StatisticLine text="Positive" value={positive + "%"} />
       </tbody>
     </table>
   );
