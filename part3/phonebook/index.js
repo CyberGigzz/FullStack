@@ -60,7 +60,6 @@ app.delete("/api/persons/:id", (request, response, next) => {
   });
 });
 
-
 app.post("/api/persons", (request, response, next) => {
   const { name, number } = request.body;
 
