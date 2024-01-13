@@ -26,16 +26,6 @@ app.use(
   })
 );
 
-app.get("/info", (request, response, next) => {
-  Person.find({}).then((people) => {
-    response.send(
-      `<p>Phonebook has info for ${
-        people.length
-      } people</p><p>${new Date()}</p>`
-    );
-  });
-});
-
 app.get("/api/persons", (request, response) => {
   Person.find({}).then((persons) => {
     response.json(persons);
@@ -54,17 +44,22 @@ app.get("/api/persons/:id", (request, response, next) => {
     .catch((error) => next(error));
 });
 
+app.get("/info", (request, response, next) => {
+  Person.find({}).then((people) => {
+    response.send(
+      `<p>Phonebook has info for ${
+        people.length
+      } people</p><p>${new Date()}</p>`
+    );
+  });
+});
+
 app.delete("/api/persons/:id", (request, response, next) => {
   Person.findByIdAndDelete(request.params.id).then(() => {
     response.status(204).end();
   });
 });
 
-function generateUniqueID() {
-  const min = 1000; // Minimum ID
-  const max = 9999; // Maximum ID
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
 app.post("/api/persons", (request, response, next) => {
   const { name, number } = request.body;
