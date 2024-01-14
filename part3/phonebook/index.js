@@ -44,7 +44,7 @@ app.get("/api/persons/:id", (request, response, next) => {
     .catch((error) => next(error));
 });
 
-app.get("/info", (request, response, next) => {
+app.get("/info", (request, response) => {
   Person.find({}).then((people) => {
     response.send(
       `<p>Phonebook has info for ${
@@ -54,7 +54,7 @@ app.get("/info", (request, response, next) => {
   });
 });
 
-app.delete("/api/persons/:id", (request, response, next) => {
+app.delete("/api/persons/:id", (request, response) => {
   Person.findByIdAndDelete(request.params.id).then(() => {
     response.status(204).end();
   });
