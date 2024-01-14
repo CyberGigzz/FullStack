@@ -42,7 +42,6 @@ const App = () => {
         personService
           .update(existingPerson.id, nameObject)
           .then((returnedPerson) => {
-            console.log(returnedPerson);
             setPersons(
               persons.map((person) =>
                 person.id !== existingPerson.id ? person : returnedPerson
@@ -67,17 +66,31 @@ const App = () => {
           });
       }
     } else {
-      personService.create(nameObject).then((returnedPerson) => {
-        setPersons(persons.concat(returnedPerson));
-        setNewPerson({
-          name: "",
-          number: "",
+      personService
+        .create(nameObject)
+        .then((returnedPerson) => {
+          setPersons(persons.concat(returnedPerson));
+          setNewPerson({
+            name: "",
+            number: "",
+          });
+          setMessage(`Added ${returnedPerson.name}`);
+          setTimeout(() => {
+            setMessage(null);
+          }, 5000);
+        })
+        .catch((error) => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(error.response.data, "text/html");
+          let errorMessage = doc.body.textContent || "";
+          errorMessage = errorMessage.split(".")[0];
+
+          setMessage(errorMessage);
+
+          setTimeout(() => {
+            setMessage(null);
+          }, 5000);
         });
-        setMessage(`Added ${returnedPerson.name}`);
-        setTimeout(() => {
-          setMessage(null);
-        }, 5000);
-      });
     }
   };
 

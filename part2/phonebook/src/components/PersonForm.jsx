@@ -17,7 +17,7 @@ const PersonForm = ({ newPerson, handleInputChange, addName }) => {
         <div>
           number:{" "}
           <input
-            type="number"
+            type="text"
             name="number"
             value={newPerson.number}
             onChange={handleInputChange}
